@@ -4,7 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-path = "data/Train.xlsx"
+train_path = "data/Train.xlsx"
+test_path = 'data/Test.xlsx'
 
 def load_data(path):
     '''

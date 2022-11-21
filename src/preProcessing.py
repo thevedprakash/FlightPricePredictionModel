@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.preprocessing import LabelEncoder
 
 # import load module from load.py
-from loadData import load_data , path
+from loadData import load_data , train_path
 
 
 # Duration converted to Minutes.
@@ -215,7 +215,7 @@ def pre_process(df,target):
 
 if __name__ == "__main__": 
 
-    df = load_data(path)
+    df = load_data(train_path)
     # print(df.shape)
     # print(df.head())
     # print("-"*72)
@@ -228,6 +228,8 @@ if __name__ == "__main__":
     # df = generate_additional_features(df)
     # print(df.shape)
     # print(df.head())
-    X,y,encoded_dictpre_process = (df,target)
+    X,y,encoded_dict = pre_process (df,target)
+    print(encoded_dict)
+    
     print(X.head())
     print(X.shape,y.shape)
