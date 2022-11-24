@@ -2,6 +2,8 @@ import sys
 sys.path.append('src')
 # https://stackoverflow.com/questions/4761041/python-import-src-modules-when-running-tests
 
+
+import pandas as pd
 from flask import Flask, json, request, jsonify , render_template
 from flask_ngrok import run_with_ngrok
 import os
@@ -30,7 +32,7 @@ with open('models/encoded.pickle', 'rb') as handle:
 model_path = "models/randomForestModel.pickle"
 model= joblib.load(model_path)
 
-
+import json
 
 
 @app.route('/api', methods=['POST','GET'])
@@ -61,28 +63,55 @@ def predict():
 def root():
     return 'Root of Flask WebApp!'
 
+
+@app.route("/prediction")
+def prediction():
+
+    Airline = request.args.get('Airline')
+    Source = request.args.get('Source')
+    Destination = request.args.get('Destination')
+    Departure_Date = request.args.get('Departure_Date')
+    Arrival_Date = request.args.get('Arrival_Date')
+    Departure_Time = request.args.get('Departure_Time')
+    Arrival_Time = request.args.get('Arrival_Time')
+    Route = request.args.get('Route')
+    Stops = request.args.get('Stops')
+    Additional = request.args.get('Additional')
+
+    data_dict = {
+            'Airline'  : Airline,
+            'Source'  : Source,
+            'Destination'  : Destination,
+            'Date_of_Journey'  : Departure_Date,
+            'Dep_Time'  : Departure_Time,
+            # 'Arrival_Date'  : Arrival_Date,
+            'Duration'  : '2h 50m',
+            'Arrival_Time'  : Arrival_Time,
+            'Route'  : Route,
+            'Total_Stops' : Stops,
+            'Additional_Info'  : Additional,
+        }
+
+    print(data_dict)
+
+    # Convert json data to dataframe
+    df = pd.DataFrame.from_dict([data_dict],orient='columns')
+    # print("-"*80)
+    print(df)
+
+    # Pre-process and make prediction using model loaded from disk as per the data.
+    data = preprocess_and_predict(df,encoded_dict)
+    print("-"*80)
+    print(data)
+    print("-"*80)
+ 
+    prediction = model.predict(data)
+
+
+    return str(prediction[0])
+
 @app.route('/index', methods=['GET', 'POST'])
 def index():
-    # if request.method == 'POST':
-    #     Airline = request.form['Airline']
-    #     Source = request.form['baths']
-    #     Destination = request.form['sqft']
-    #     Departure_Date = request.form['Airline']
-    #     Arrival_Date = request.form['baths']
-    #     Departure_Time = request.form['Airline']
-    #     Arrival_Time = request.form['baths']
-    #     Route = request.form['sqft']
-    #     Stops = request.form['Airline']
-    #     Additional = request.form['baths']
-
-    #     test_json = xxx
-    #     test_input = preprocess_and_predict(test_json,encoded_dict)
-    #     pred = model.predict(test_input)
-
-    #     return render_template('templates/index.html', pred=str(pred))
-    
-    
-
     return render_template('index.html', airlines=airlines, 
     sources=sources, destinations=destinations,
     routes=routes , pred=str(9999))
