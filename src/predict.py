@@ -51,7 +51,7 @@ if __name__ == "__main__":
 
     print(encoded_dict)
     
-    model_path = "models/randomForestModel.sav"
+    model_path = "models/randomForestModel.pickle"
     saved_model= joblib.load(model_path)
 
     test_df = load_data(test_path)

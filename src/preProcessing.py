@@ -204,7 +204,7 @@ def pre_process(df,target):
     '''
     sanity_check(df)
     handle_missing_value(df)
-    encoded_dict = handle_categorical_values(df,target)
+    df,encoded_dict = handle_categorical_values(df,target)
     generate_additional_features(df)
     X = filter_predictor_columns(df)
     y = df[target]

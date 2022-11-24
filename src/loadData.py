@@ -22,4 +22,5 @@ if __name__ == "__main__":
     path = "data/Train.xlsx"
     # Read the data 
     df = load_data(path)
-    print(df.shape)
+    print(df.columns)
+    print(df['Airline'].unique())

@@ -1,0 +1,301 @@
+<!------ Header and Footer---------->
+<!-- https://codepen.io/abdullahturel/pen/ypYmQj -->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <!-- https://www.w3schools.com/icons/tryit.asp?icon=fab_fa-accessible-icon&unicon=f368 -->
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css" rel="stylesheet"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+</head>
+
+<style>
+    .navbar {
+        background-color: #484848;
+    }
+
+    .navbar .navbar-nav .nav-link {
+        color: #fff;
+    }
+
+    .navbar .navbar-nav .nav-link:hover {
+        color: #fbc531;
+    }
+
+    .navbar .navbar-nav .active>.nav-link {
+        color: #fbc531;
+    }
+
+    footer a.text-light:hover {
+        color: #fed136 !important;
+        text-decoration: none;
+    }
+
+    footer .cizgi {
+        border-right: 1px solid #535e67;
+    }
+
+    @media (max-width: 992px) {
+        footer .cizgi {
+            border-right: none;
+        }
+    }
+</style>
+
+<body style="background-image: url('static/airplane.jpg');background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;">
+
+    <header>
+        <!--- Navbar --->
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand text-white" href="#"><i class="fa fa-graduation-cap fa-lg mr-2"></i>BLOG</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nvbCollapse"
+                    aria-controls="nvbCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="nvbCollapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item pl-1">
+                            <a class="nav-link" href="#"><i class="bi bi-person"></i> Anasayfa </a>
+                        </li>
+                        <li class="nav-item active pl-1">
+                            <a class="nav-link" href="#"><i class="fa fa-th-list fa-fw mr-1"></i>Blog</a>
+                        </li>
+                        <li class="nav-item pl-1">
+                            <a class="nav-link" href="#"><i class="fa fa-info-circle fa-fw mr-1"></i>Hakkımızda</a>
+                        </li>
+                        <li class="nav-item pl-1">
+                            <a class="nav-link" href="#"><i
+                                    class="fa fa-phone fa-fw fa-rotate-180 mr-1"></i>İletişim</a>
+                        </li>
+                        <li class="nav-item pl-1">
+                            <a class="nav-link" href="#"><i class="fa fa-user-plus fa-fw mr-1"></i>Kayıt Ol</a>
+                        </li>
+                        <li class="nav-item pl-1">
+                            <a class="nav-link" href="#"><i class="fa fa-sign-in fa-fw mr-1"></i>Oturum Aç</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--# Navbar #-->
+    </header>
+
+
+
+    <div class="container-fluid">
+        <div class="row text-secondary">
+            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 col-xs-12">
+                <h1>Itenary</h1>
+                <p>Please Fill in Travel Details. And we will provide the Price!</p>
+            </div>
+
+            <div class="col-md-9 col-lg-9 col-xl-9 col-sm-12 col-xs-12 p-3">
+                <div class="card" style="background-color: rgba(0,0,0,0.3);">
+
+                    <div class="card-body">
+                        <form>
+                            <div class="row justify-content-around">
+
+                                <label for="" class="text-white">Airline</label>
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text" for=""><i class="bi bi-airplane"></i></label>
+                                    <select class="form-select" aria-label="Filter select" placeholder="Airline"
+                                        aria-label="Airline" aria-describedby="basic-addon1">
+                                        <option selected disabled>Select Airline</option>
+                                        {% for airline in airlines %}
+                                        <option value="role">{{ airline }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="" class="text-white">Source</label>
+                                    <div class="input-group mb-3">
+                                        <label class="input-group-text" for=""><i class="bi bi-geo-alt"></i></label>
+                                        <select class="form-select" aria-label="Filter select" placeholder="Source"
+                                            aria-label="Source" aria-describedby="basic-addon1">
+                                            <option selected disabled>Select Source</option>
+                                            {% for source in sources %}
+                                            <option value="source">{{ source }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-6">
+                                    <label for="" class="text-white">Destination</label>
+                                    <div class="input-group mb-3">
+                                        <label class="input-group-text" for=""><i class="bi bi-geo-alt"></i></label>
+                                        <select class="form-select" aria-label="Filter select" placeholder="Destination"
+                                            aria-label="Destination" aria-describedby="basic-addon1">
+                                            <option selected disabled>Select Destination</option>
+                                            {% for destination in destinations %}
+                                            <option value="destination">{{ destination }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="" class="text-white">Departure Date</label>
+                                        <input type="date" name="" id="" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-group mb-4">
+                                        <label for="" class="text-white">Departure Time</label>
+                                        <input type="time" name="" id="" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-group mb-4">
+                                        <label for="" class="text-white">Arrival Date</label>
+                                        <input type="date" name="" id="" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-group mb-4">
+                                        <label for="" class="text-white">Arrival Time</label>
+                                        <input type="time" name="" id="" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-8">
+                                    <label for="" class="text-white">Route</label>
+                                    <div class="input-group  mb-3">
+                                        <label class="input-group-text" for=""><i class="bi bi-geo-alt"></i></label>
+                                        <select class="form-select" aria-label="Filter select" placeholder="Route"
+                                            aria-label="Route" aria-describedby="basic-addon1">
+                                            <option selected disabled>Select Route</option>
+                                            {% for route in routes %}
+                                            <option value="Route">{{ route }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-4">
+                                    <div class="form-group mb-3">
+                                        <label for="" class="text-white">No. of Stops</label>
+                                        <input type="number" class="form-control" placeholder="Stops"
+                                            aria-label="Stops">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="" class="text-white">Additional Info</label>
+                                        <input type="text" class="form-control" placeholder="Additional Info"
+                                            aria-label="Additional Info">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">All details filled.</label>
+                            </div>
+                            <button type="submit" class="btn btn-lg btn-primary">Submit</button>
+                            <button type="button" class="btn btn-secondary btn-lg" disabled>Reset</button>
+
+                            <hr>
+                            <h3>
+                                Fancy display heading
+                                <small class="text-muted">{{ pred }}</small>
+                            </h3>
+                    </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--- Footer --->
+    <footer>
+        <div class="jumbotron jumbotron-fluid bg-secondary p-4 mt-5 mb-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 cizgi">
+                        <div class="card bg-secondary border-0">
+                            <div class="card-body text-light text-center">
+                                <h5 class="card-title text-white display-4" style="font-size:30px">Telif Hakkı</h5>
+                                <p class="d-inline lead">Tüm Hakları Saklıdır © 2018<br>
+                                    <a href="#" class="text-light d-block lead">Blog</a>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 cizgi">
+                        <div class="card bg-secondary border-0">
+                            <div class="card-body text-center">
+                                <h5 class="card-title text-white display-4" style="font-size:30px">İletişim</h5>
+                                <a class="text-light d-block lead" style="margin-left: -20px" href="#"><i
+                                        class="fa fa-phone mr-2"></i>+90 (000) 000 0 000</a>
+                                <a class="text-light d-block lead" href="#"><i
+                                        class="fa fa-envelope mr-2"></i>admin@localhost.com</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                        <div class="card bg-secondary border-0">
+                            <div class="card-body text-center">
+                                <h5 class="card-title text-white display-4" style="font-size:30px">Sosyal Medya</h5>
+
+                                <a class="text-light" href="#"><i class="fa fa-facebook-square fa-fw fa-2x"></i></a>
+
+                                <a class="text-light" href="#"><i class="fa fa-twitter-square fa-fw fa-2x"></i></a>
+
+                                <a class="text-light" href="#"><i class="fa fa-instagram fa-fw fa-2x"></i></a>
+
+                                <a class="text-light" href="#"><i class="fa fa-linkedin fa-fw fa-2x"></i></a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--# Footer #-->
+
+    <script>
+        function ResetData() {
+            document.getElementById("id1").placeholder = "Type name here..";
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
