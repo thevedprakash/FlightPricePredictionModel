@@ -5,7 +5,6 @@ sys.path.append('src')
 
 import pandas as pd
 from flask import Flask, json, request, jsonify , render_template
-from flask_ngrok import run_with_ngrok
 import os
 import urllib.request
 from werkzeug.utils import secure_filename
@@ -18,12 +17,6 @@ import joblib
 import pickle
 
 app = Flask(__name__)
-
-# run_with_ngrok(app)
-# app.secret_key = "caircocoders-ednalan"
-
-# UPLOAD_FOLDER = 'static/uploads'
-# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Load data (deserialize)
 with open('models/encoded.pickle', 'rb') as handle:
@@ -59,9 +52,9 @@ def predict():
     print("price : ",output)
     return jsonify(output)
 
-@app.route("/")
-def root():
-    return 'Root of Flask WebApp!'
+# @app.route("/")
+# def root():
+#     return 'Root of Flask WebApp!'
 
 
 @app.route("/prediction")
@@ -110,11 +103,11 @@ def prediction():
 
     return str(prediction[0])
 
-@app.route('/index', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('index.html', airlines=airlines, 
     sources=sources, destinations=destinations,
     routes=routes , pred=str(9999))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0',debug=True)
