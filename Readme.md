@@ -1,6 +1,1 @@
-pip install gunicorn
-pip install pipreqs
--- at main type
-pipreqs
-
-create procfile
+This is Demonstration App for docker deployment and minikube installation.
