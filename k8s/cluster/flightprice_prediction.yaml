@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: flightprice
-          image: gcr.io/argo-demo-401813/flight-app:0.0.1
+          image: gcr.io/argo-demo-401813/flight-app:1.0.1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8082
