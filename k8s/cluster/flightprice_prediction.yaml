@@ -21,7 +21,7 @@ spec:
           image: gcr.io/argo-demo-401813/flight-app:1.0.1
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8082
+            - containerPort: 5000
 
 ---
 # service.yaml
@@ -36,4 +36,4 @@ spec:
   ports:
     - protocol: "TCP"
       port: 80
-      targetPort: 8082
+      targetPort: 5000
