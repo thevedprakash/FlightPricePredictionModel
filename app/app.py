@@ -1,31 +1,30 @@
+import os
+
+import urllib.request
 import sys
 sys.path.append('src')
-# https://stackoverflow.com/questions/4761041/python-import-src-modules-when-running-tests
-
-
-import pandas as pd
-from flask import Flask, json, request, jsonify , render_template
-import os
-import urllib.request
-from werkzeug.utils import secure_filename
-
-from predict import preprocess_and_predict
-
-from variables import airlines, sources, destinations, routes
-
+import json
 import joblib
 import pickle
+import pandas as pd
+from flask_cors import CORS
+from flask import Flask, json, request, jsonify , render_template
+from werkzeug.utils import secure_filename
+from predict import preprocess_and_predict
+from variables import airlines, sources, destinations, routes
 
+
+ # https://stackoverflow.com/questions/4761041/python-import-src-modules-when-running-tests
+
+# This will enable CORS for all routes
 app = Flask(__name__)
+CORS(app) 
 
 # Load data (deserialize)
 with open('models/encoded.pickle', 'rb') as handle:
     encoded_dict = pickle.load(handle)
-
 model_path = "models/randomForestModel.pickle"
 model= joblib.load(model_path)
-
-import json
 
 
 @app.route('/api', methods=['POST','GET'])
@@ -52,14 +51,9 @@ def predict():
     print("price : ",output)
     return jsonify(output)
 
-# @app.route("/")
-# def root():
-#     return 'Root of Flask WebApp!'
-
 
 @app.route("/prediction")
 def prediction():
-
     Airline = request.args.get('Airline')
     Source = request.args.get('Source')
     Destination = request.args.get('Destination')
@@ -84,7 +78,6 @@ def prediction():
             'Total_Stops' : Stops,
             'Additional_Info'  : Additional,
         }
-
     print(data_dict)
 
     # Convert json data to dataframe
@@ -97,10 +90,7 @@ def prediction():
     print("-"*80)
     print(data)
     print("-"*80)
- 
     prediction = model.predict(data)
-
-
     return str(prediction[0])
 
 @app.route('/', methods=['GET', 'POST'])
@@ -110,4 +100,4 @@ def index():
     routes=routes , pred=str(9999))
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',debug=True)
+    app.run(host='0.0.0.0',port=5000,debug=True)
